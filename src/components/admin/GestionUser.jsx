@@ -1,6 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Modal from '../Modal';
 import FormRegister from './FormUsuarioNuevo';
+import MaterialTable from 'material-table';
+//icon
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+
+const tableIcons = {
+	Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+	Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+	Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+	Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+	DetailPanel: forwardRef((props, ref) => (
+		<ChevronRight {...props} ref={ref} />
+	)),
+	Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+	Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+	Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+	FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+	LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+	NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+	PreviousPage: forwardRef((props, ref) => (
+		<ChevronLeft {...props} ref={ref} />
+	)),
+	ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+	Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+	SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+	ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+};
 const GestionUser = () => {
 	const [usuarios, setUsuarios] = useState([
 		{
@@ -75,94 +116,29 @@ const GestionUser = () => {
 				</Modal>
 			) : null}
 			<div>
-				<table className="min-w-full border-collapse block md:table font-barlow">
-					<thead className="block md:table-header-group">
-						<tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Nombre
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Apellido
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								DNI
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Usuario
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Correo
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Telefono
-							</th>
-							<th className="bg-azulEntel p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
-								Acciones
-							</th>
-						</tr>
-					</thead>
-					<tbody className="block md:table-row-group">
-						{usuarios.map((user, index) => {
-							return (
-								<tr
-									key={index}
-									className="bg-gray-100 border border-grey-500 md:border-none block md:table-row"
-								>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Nombre
-										</span>
-										{user.name}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Apellido
-										</span>
-										{user.lastname}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											DNI
-										</span>
-										{user.dni}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Usuario
-										</span>
-										{user.username}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Correo
-										</span>
-										{user.email}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Telefono
-										</span>
-										{user.phone}
-									</td>
-									<td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-										<span className="inline-block w-1/3 md:hidden font-bold">
-											Acciones
-										</span>
-										<button className="bg-azulEntel hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded mr-2">
-											Editar
-										</button>
-										<button
-											onClick={() => borrarUsuarios(user.username)}
-											className="bg-naranjaEntel hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded"
-										>
-											Eliminar
-										</button>
-									</td>
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+				<MaterialTable
+					title="Informacion de clientes"
+					data={usuarios}
+					columns={[
+						{ title: 'Nombre', field: 'name' },
+						{ title: 'Apellido', field: 'lastname' },
+						{ title: 'DNI', field: 'dni' },
+						{ title: 'Usuario', field: 'username' },
+						{ title: 'Correo', field: 'email' },
+					]}
+					icons={tableIcons}
+					actions={[
+						{
+							icon: 'Editar',
+							tooltip: 'Save User',
+						},
+						(rowData) => ({
+							icon: 'delete',
+							tooltip: 'Delete User',
+							onClick: () => borrarUsuarios(rowData.username),
+						}),
+					]}
+				/>
 			</div>
 		</div>
 	);
