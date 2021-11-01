@@ -63,6 +63,27 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario }) => {
 						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 						htmlFor="grid-password"
 					>
+						DNI
+					</label>
+
+					<input
+						{...register('dni', {
+							required: true,
+							pattern: /^[0-9]{9}$/,
+						})}
+						minLength="7"
+						maxLength="9"
+						className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+						id="grid-telefono"
+						type="tel"
+						placeholder="08888880"
+					/>
+				</div>
+				<div className="w-full px-3">
+					<label
+						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+						htmlFor="grid-password"
+					>
 						Telefono
 					</label>
 

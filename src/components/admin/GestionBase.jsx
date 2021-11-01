@@ -89,7 +89,7 @@ const GestionBase = () => {
 			if (getExention(file)) {
 				reader.readAsBinaryString(file);
 			} else {
-				alert('Invalid file input, Select Excel, CSV file');
+				alert('Solo se acepta acrchivos Excel o CSV');
 			}
 		} else {
 			setData([]);
@@ -98,16 +98,25 @@ const GestionBase = () => {
 	};
 
 	return (
-		<div>
-			<h1>GestionBase</h1>
-			<div>
-				<input type="file" onChange={importExcel} />
-				<MaterialTable
-					title="Importar EXcel"
-					data={data}
-					columns={colDefs}
-					icons={tableIcons}
-				/>
+		<div className="mx-8 mt-4">
+			<h1 className="text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
+				GestionBase
+			</h1>
+			<MaterialTable
+				title="Informacion de clientes"
+				data={data}
+				columns={colDefs}
+				icons={tableIcons}
+			/>
+			<div className="mt-6 flex justify-between align-center">
+				<label className="bg-transparent border-2 border-naranjaEntel font-semibold font-barlow text-naranjaEntel text-center text-lg py-3 px-3 rounded-lg transition duration-500 ease-in-out hover:bg-naranjaEntel hover:text-white cursor-pointer">
+					<span>importar base</span>
+					<input className="hidden" type="file" onChange={importExcel} />
+				</label>
+				<label className="bg-transparent border-2 border-naranjaEntel font-semibold font-barlow text-naranjaEntel text-center text-lg py-3 px-3 rounded-lg transition duration-500 ease-in-out hover:bg-naranjaEntel hover:text-white cursor-pointer">
+					<span>Subir base</span>
+					<input className="hidden" type="file" onChange={importExcel} />
+				</label>
 			</div>
 		</div>
 	);

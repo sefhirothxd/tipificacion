@@ -51,6 +51,7 @@ const Login = () => {
 								required: true,
 								pattern: /[^0-9]/,
 							})}
+							autoComplete="off"
 							className="py-1 px-1 outline-none border-none bg-azulEntel placeholder-white focus:text-white text-white"
 							type="text"
 							placeholder="Username"
