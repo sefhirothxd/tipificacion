@@ -95,14 +95,14 @@ const GestionUser = () => {
 	};
 
 	return (
-		<div className="mx-8 mt-4">
+		<div className="mx-2 md:mx-8 mt-4 ">
 			<div className="flex  justify-between items-center flex-wrap">
-				<h1 className="text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
-					Lista de usuarios
+				<h1 className="text-2xl md:text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
+					Gestion de usuarios
 				</h1>
 				<button
 					onClick={() => setactivo(true)}
-					className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mt-8 font-barlow outline-none focus:outline-none"
+					className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
 				>
 					Crear Usuario
 				</button>
@@ -117,7 +117,7 @@ const GestionUser = () => {
 			) : null}
 			<div>
 				<MaterialTable
-					title="Informacion de clientes"
+					title=""
 					data={usuarios}
 					columns={[
 						{ title: 'Nombre', field: 'name' },
@@ -129,15 +129,18 @@ const GestionUser = () => {
 					icons={tableIcons}
 					actions={[
 						{
-							icon: 'Editar',
-							tooltip: 'Save User',
+							icon: Edit,
+							tooltip: 'Editar Usuario',
 						},
 						(rowData) => ({
-							icon: 'delete',
-							tooltip: 'Delete User',
+							icon: DeleteOutline,
+							tooltip: 'Dar de baja',
 							onClick: () => borrarUsuarios(rowData.username),
 						}),
 					]}
+					options={{
+						actionsColumnIndex: -1,
+					}}
 				/>
 			</div>
 		</div>

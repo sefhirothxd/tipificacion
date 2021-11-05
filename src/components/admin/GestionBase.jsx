@@ -98,9 +98,9 @@ const GestionBase = () => {
 	};
 
 	return (
-		<div className="mx-8 mt-4">
+		<div className="mx-8 mt-4 ">
 			<h1 className="text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
-				GestionBase
+				Gestion Base
 			</h1>
 			<MaterialTable
 				title="Informacion de clientes"

@@ -14,8 +14,8 @@ const Principal = () => {
 	}, []);
 
 	return (
-		<div className="bg-gray-100 w-full min-h-screen">
-			<div className="flex justify-center items-center h-full">
+		<div className="bg-gray-100 w-full content-container flex justify-center items-start">
+			<div className="flex justify-center items-center  w-full">
 				<form className=" py-9 px-9 rounded-lg shadow-lg font-barlow flex justify-between items-center w-1200 mt-8 bg-white">
 					<div className="">
 						<h1>Informacion del cliente</h1>
