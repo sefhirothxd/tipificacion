@@ -77,9 +77,9 @@ const GestionUser = () => {
 	};
 
 	useEffect(() => {
-		axios.get('http://typing-control.herokuapp.com/user/list').then((res) => {
+		axios.get('https://typing-control.herokuapp.com/user/list').then((res) => {
+			console.log('usuarios: ', res.data);
 			setUsuarios(res.data);
-			console.log(res.data);
 		});
 		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
 			console.log(res.data);
