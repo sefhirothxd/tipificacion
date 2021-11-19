@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ReactComponent as Hamburger } from '../asset/icon/dashboard.svg';
+import React, { useState, useEffect } from 'react';
+import { ReactComponent as Arrowopen } from '../asset/icon/hamburgerBlanca.svg';
 import { ReactComponent as HamburgerX } from '../asset/icon/close.svg';
 import { ReactComponent as CerrarSesion } from '../asset/icon/cerrarSesion.svg';
 import foto from '../asset/img/foto-perfil.jpg';
@@ -7,24 +7,29 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
 	const [menu, setMenu] = useState(false);
-	const [propiedad, setPropiedad] = useState('-translate-x-96');
+	const [propiedad, setPropiedad] = useState('-translate-x-80');
+	const [activar, setActivar] = useState('border-opacity-100 border-white');
 
 	const probando = (data) => {
 		console.log(data);
 		if (data === false) {
-			setPropiedad('-translate-x-96');
+			setPropiedad('-translate-x-80');
 			setMenu(false);
 		} else {
 			setPropiedad('translate-x-0');
 			setMenu(true);
 		}
 	};
+	useEffect(() => {
+		console.log(window.location.pathname);
+		setActivar(window.location.pathname);
+	}, [menu]);
 	return (
 		<div
-			className={`bg-azulEntel text-white w-full py-4 px-4 relative flex items-center justify-between`}
+			className={`bg-azulEntel text-white w-full   py-4 px-4 relative flex items-center justify-between`}
 		>
 			<div
-				className={`bg-azulEntel h-screen z-20 ${propiedad} transform w-80 tras absolute left-0 top-0 pt-16  transition-all duration-500 flex flex-col justify-between`}
+				className={`bg-azulEntel h-screen z-20 ${propiedad} transform w-80  absolute left-0 top-0 pt-16  transition-all duration-500 flex flex-col justify-between`}
 			>
 				<div className="border-white border-t-2 ">
 					<HamburgerX
@@ -51,7 +56,13 @@ const Header = () => {
 							className="   cursor-pointer "
 							onClick={() => probando(!menu)}
 						>
-							<p className="mx-4 px-2 py-2  hover:text-azulEntel font-barlow text-lg   hover:bg-gray-50">
+							<p
+								className={
+									activar === '/dashboard'
+										? 'px-5  py-2 text-white font-barlow text-lg border-l-4  border-naranjaEntel hover:bg-white hover:bg-opacity-70 hover:text-azulEntel'
+										: 'px-5  py-2 text-white hover:text-azulEntel font-barlow text-lg  hover:bg-white hover:bg-opacity-70'
+								}
+							>
 								Panel Administrativo
 							</p>
 						</Link>
@@ -60,7 +71,13 @@ const Header = () => {
 							className="cursor-pointer"
 							onClick={() => probando(!menu)}
 						>
-							<p className="mx-4 px-2 py-2  hover:text-azulEntel font-barlow text-lg   hover:bg-gray-50">
+							<p
+								className={
+									activar === '/dashboard/gestion_user'
+										? 'px-5  py-2 text-white font-barlow text-lg border-l-4  border-naranjaEntel hover:bg-white hover:bg-opacity-70 hover:text-azulEntel'
+										: 'px-5  py-2 text-white hover:text-azulEntel font-barlow text-lg  hover:bg-white hover:bg-opacity-70'
+								}
+							>
 								Gestion de Usuarios
 							</p>
 						</Link>
@@ -69,7 +86,13 @@ const Header = () => {
 							className="cursor-pointer"
 							onClick={() => probando(!menu)}
 						>
-							<p className="mx-4 px-2 py-2  hover:text-azulEntel font-barlow text-lg   hover:bg-gray-50">
+							<p
+								className={
+									activar === '/dashboard/gestion_base'
+										? 'px-5  py-2 text-white font-barlow text-lg border-l-4  border-naranjaEntel hover:bg-white hover:bg-opacity-70 hover:text-azulEntel'
+										: 'px-5  py-2 text-white hover:text-azulEntel font-barlow text-lg  hover:bg-white hover:bg-opacity-70'
+								}
+							>
 								Gestion de Base
 							</p>
 						</Link>
@@ -78,7 +101,13 @@ const Header = () => {
 							className="cursor-pointer"
 							onClick={() => probando(!menu)}
 						>
-							<p className="mx-4 px-2 py-2  hover:text-azulEntel font-barlow text-lg   hover:bg-gray-50">
+							<p
+								className={
+									activar === '/tipificar'
+										? 'px-5  py-2 text-white font-barlow text-lg border-l-4  border-naranjaEntel hover:bg-white hover:bg-opacity-70 hover:text-azulEntel'
+										: 'px-5  py-2 text-white hover:text-azulEntel font-barlow text-lg  hover:bg-white hover:bg-opacity-70'
+								}
+							>
 								Gestion de Llamadas
 							</p>
 						</Link>
@@ -99,11 +128,10 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className="flex justify-start items-center relative py-4  mr-10">
-				<Hamburger
-					fill="white"
+				<Arrowopen
 					width="35px"
 					height="35px"
-					className="mr-2 cursor-pointer absolute top-0"
+					className="mr-2 text-white cursor-pointer absolute top-0 "
 					onClick={() => probando(!menu)}
 				/>
 			</div>

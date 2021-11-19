@@ -1,5 +1,6 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import Modal from '../Modal';
+import axios from 'axios';
 import FormRegister from './FormUsuarioNuevo';
 import MaterialTable from 'material-table';
 //icon
@@ -43,56 +44,48 @@ const tableIcons = {
 	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 const GestionUser = () => {
-	const [usuarios, setUsuarios] = useState([
-		{
-			name: 'Bryan',
-			lastname: 'Vera',
-			dni: '11111111',
-			username: 'bvera',
-			email: 'bryan@gmail.com',
-			phone: '555-555-5555',
-		},
-		{
-			name: 'Cristina',
-			lastname: 'Ruiz',
-			dni: '22222222',
-			username: 'cruiz',
-			email: 'cristina@gmail.com',
-			phone: '555-555-5555',
-		},
-		{
-			name: 'Carlos',
-			lastname: 'Gonzales',
-			dni: '33333333',
-			username: 'cgonzales',
-			email: 'carlos@gmail.com',
-			phone: '555-555-5555',
-		},
-		{
-			name: 'Juan ',
-			lastname: 'Tello',
-			dni: '44444444',
-			username: 'jtello',
-			email: 'Juan@gmail.com',
-			phone: '555-555-5555',
-		},
-	]);
-
+	const [usuarios, setUsuarios] = useState([]);
+	const [editUser, setEditUser] = useState({});
+	const [listRol, setListRol] = useState();
 	const [activo, setactivo] = useState(false);
+	const [edit, setEdit] = useState(false);
 
-	const agregarUsuario = (data) => {
+	const agregarUsuario = async (data) => {
 		console.log(data);
-		setUsuarios([...usuarios, data]);
+		const res = await axios.post(
+			'http://typing-control.herokuapp.com/user/save-user',
+			data
+		);
+		console.log(res);
+		axios.get('http://typing-control.herokuapp.com/user/list').then((res) => {
+			setUsuarios(res.data);
+			console.log(res.data);
+		});
 	};
 
 	const borrarUsuarios = (data) => {
 		console.log(data);
-		setUsuarios(usuarios.filter((usuario) => usuario.username !== data));
+		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
+	};
+	const editarUsuario = (data) => {
+		setEditUser(data);
+		console.log(editUser);
 	};
 
 	const cerrarModal = () => {
 		setactivo(false);
 	};
+
+	useEffect(() => {
+		axios.get('http://typing-control.herokuapp.com/user/list').then((res) => {
+			setUsuarios(res.data);
+			console.log(res.data);
+		});
+		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+			console.log(res.data);
+			setListRol(res.data.list);
+		});
+	}, []);
 
 	return (
 		<div className="mx-2 md:mx-8 mt-4 ">
@@ -109,10 +102,19 @@ const GestionUser = () => {
 			</div>
 			{activo ? (
 				<Modal cerrarModal={cerrarModal}>
-					<FormRegister
-						cerrarModal={cerrarModal}
-						agregarUsuario={agregarUsuario}
-					/>
+					{edit ? (
+						<FormRegister
+							cerrarModal={cerrarModal}
+							editarUsuario={editarUsuario}
+							editUser={editUser}
+						/>
+					) : (
+						<FormRegister
+							cerrarModal={cerrarModal}
+							agregarUsuario={agregarUsuario}
+							listRol={listRol}
+						/>
+					)}
 				</Modal>
 			) : null}
 			<div>
@@ -120,22 +122,25 @@ const GestionUser = () => {
 					title=""
 					data={usuarios}
 					columns={[
-						{ title: 'Nombre', field: 'name' },
-						{ title: 'Apellido', field: 'lastname' },
-						{ title: 'DNI', field: 'dni' },
-						{ title: 'Usuario', field: 'username' },
-						{ title: 'Correo', field: 'email' },
+						{ title: 'Nombre', field: 'person.name' },
+						{ title: 'Apellido', field: 'person.lastName' },
+						{ title: 'DNI', field: 'person.numDoc' },
+						{ title: 'Rol', field: 'rol.name' },
+						{ title: 'Usuario', field: 'userName' },
+						{ title: 'Correo', field: 'person.email' },
 					]}
 					icons={tableIcons}
 					actions={[
-						{
+						(rowData) => ({
 							icon: Edit,
 							tooltip: 'Editar Usuario',
-						},
+							onClick: () => editarUsuario(rowData),
+						}),
+
 						(rowData) => ({
 							icon: DeleteOutline,
 							tooltip: 'Dar de baja',
-							onClick: () => borrarUsuarios(rowData.username),
+							onClick: () => borrarUsuarios(rowData.userName),
 						}),
 					]}
 					options={{
