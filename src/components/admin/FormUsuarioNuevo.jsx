@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Select from 'react-select';
-import axios from 'axios';
 
 const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 	const {
