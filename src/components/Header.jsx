@@ -112,6 +112,21 @@ const Header = () => {
 							</p>
 						</Link>
 						<Link
+							to="/dashboard/reporte"
+							className="cursor-pointer"
+							onClick={() => probando(!menu)}
+						>
+							<p
+								className={
+									activar === '/dashboard/reporte'
+										? 'px-5  py-2 text-white font-barlow text-lg border-l-4  border-naranjaEntel hover:bg-white hover:bg-opacity-70 hover:text-azulEntel'
+										: 'px-5  py-2 text-white hover:text-azulEntel font-barlow text-lg  hover:bg-white hover:bg-opacity-70'
+								}
+							>
+								Reporte
+							</p>
+						</Link>
+						<Link
 							to="/tipificar"
 							className="cursor-pointer"
 							onClick={() => probando(!menu)}

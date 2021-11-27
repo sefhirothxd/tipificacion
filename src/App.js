@@ -8,6 +8,7 @@ import Dashboard from './components/admin/Dashboard';
 import GestionUser from './components/admin/GestionUser';
 import GestionBase from './components/admin/GestionBase';
 import GestionRol from './components/admin/GestionRol';
+import Reporte from './components/admin/Reporte';
 
 const App = () => {
 	return (
@@ -31,6 +32,9 @@ const App = () => {
 					</Route>
 					<Route path="/dashboard/gestion_rol" exact>
 						<GestionRol />
+					</Route>
+					<Route path="/dashboard/reporte" exact>
+						<Reporte />
 					</Route>
 				</Layout>
 				<Route>
