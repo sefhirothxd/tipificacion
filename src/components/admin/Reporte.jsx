@@ -65,7 +65,7 @@ const Reporte = () => {
 		<div className="mx-2 md:mx-8 mt-4 ">
 			<div className="flex justify-between sm:justify-between items-start flex-col sm:flex-row">
 				<h1 className="text-2xl md:text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
-					Gestion de Base
+					Reporte
 				</h1>
 				<button
 					onClick={() => setactivo(true)}
