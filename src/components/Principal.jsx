@@ -50,9 +50,9 @@ const Principal = () => {
 
 	return (
 		<div className="bg-gray-100 w-full content-container flex justify-center items-start">
-			<div className="flex justify-center items-center  w-full">
+			<div className="flex justify-center items-center   w-full">
 				{estado ? (
-					<form className=" py-9 px-9 rounded-lg shadow-lg font-barlow flex justify-between items-center w-1200 mt-8 bg-white">
+					<form className=" py-9 px-9 rounded-lg shadow-lg font-barlow flex justify-between flex-wrap items-center w-1200 mt-8 bg-white">
 						<div className="">
 							<h1>Informacion del cliente</h1>
 							<p>Nombre: {cliente && cliente[num]?.person.name}</p>
@@ -61,26 +61,13 @@ const Principal = () => {
 							<p>Telefono: {cliente && cliente[num]?.person.telephone}</p>
 							<p>Correo: {cliente && cliente[num]?.person.email}</p>
 						</div>
-						<div className="flex flex-col">
-							<select name="select" id="">
+						<div className="flex flex-col mt-10 sm:mt-0">
+							<select name="select" className="w-60" id="">
 								{lista ? (
 									lista.map((item, index) => {
 										return (
-											<option key={index} value={item.name}>
-												{item.name}
-											</option>
-										);
-									})
-								) : (
-									<option value="0">No hay data</option>
-								)}
-							</select>
-							<select name="select" id="">
-								{lista ? (
-									lista.map((item, index) => {
-										return (
-											item == 1 && (
-												<option key={index} value={item.name}>
+											item.nivel == 1 && (
+												<option key={index} value={item.titulo}>
 													{item.titulo}
 												</option>
 											)
@@ -90,13 +77,30 @@ const Principal = () => {
 									<option value="0">No hay data</option>
 								)}
 							</select>
-							<select name="select" id="">
+							<select name="select" className="w-60" id="">
 								{lista ? (
 									lista.map((item, index) => {
 										return (
-											<option key={index} value={item.name}>
-												{item.name}
-											</option>
+											item.nivel == 2 && (
+												<option key={index} value={item.titulo}>
+													{item.titulo}
+												</option>
+											)
+										);
+									})
+								) : (
+									<option value="0">No hay data</option>
+								)}
+							</select>
+							<select name="select" className="w-60" id="">
+								{lista ? (
+									lista.map((item, index) => {
+										return (
+											item.nivel == 3 && (
+												<option key={index} value={item.titulo}>
+													{item.titulo}
+												</option>
+											)
 										);
 									})
 								) : (
