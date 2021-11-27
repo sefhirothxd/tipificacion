@@ -13,16 +13,21 @@ const Dashboard = () => {
 					className="bg-azulEntel rounded-lg py-6 px-3 font-barlow w-80 cursor-pointer"
 				>
 					<h2 className="text-2xl text-white ">Gestion de Usuario</h2>
-					<p className="text-sm text-white">
-						Crea o modifica los datos de los usuarios.
-					</p>
+					<p className="text-sm text-white">Crea o modifica usuarios.</p>
 				</Link>
 				<Link
 					to="/dashboard/gestion_base"
 					className="bg-azulEntel rounded-lg py-6 px-3 font-barlow w-80 cursor-pointer"
 				>
 					<h2 className="text-2xl text-white ">Gestion de base</h2>
-					<p className="text-sm text-white ">cargar de las retenciones</p>
+					<p className="text-sm text-white ">cargar retenciones</p>
+				</Link>
+				<Link
+					to="/dashboard/gestion_rol"
+					className="bg-azulEntel rounded-lg py-6 px-3 font-barlow w-80 cursor-pointer"
+				>
+					<h2 className="text-2xl text-white ">Gestion de Roles</h2>
+					<p className="text-sm text-white ">cargar retenciones</p>
 				</Link>
 			</div>
 		</div>

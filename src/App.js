@@ -7,6 +7,7 @@ import Error from './components/Error404';
 import Dashboard from './components/admin/Dashboard';
 import GestionUser from './components/admin/GestionUser';
 import GestionBase from './components/admin/GestionBase';
+import GestionRol from './components/admin/GestionRol';
 
 const App = () => {
 	return (
@@ -27,6 +28,9 @@ const App = () => {
 					</Route>
 					<Route path="/dashboard/gestion_base" exact>
 						<GestionBase />
+					</Route>
+					<Route path="/dashboard/gestion_rol" exact>
+						<GestionRol />
 					</Route>
 				</Layout>
 				<Route>

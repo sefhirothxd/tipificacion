@@ -1,41 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
+const FormUsuarioNuevo = ({ cerrarModal, agregarCliente, listRol }) => {
 	const { register, handleSubmit } = useForm();
-
-	// const [list, setList] = useState();
 
 	const onSubmit = (data) => {
 		console.log(data);
-		const usuario = {
-			userName: data.userName,
+		const cliente = {
+			fecha_registro: new Date(),
 			person: {
 				name: data.name,
 				lastName: data.lastName,
-				email: data.email,
-				telephone: data.telephone,
 				numDoc: data.numDoc,
 				direction: data.direction,
-			},
-			rol: {
-				rol_id: parseInt(data.rol),
-			},
-			seguridad: {
-				password: data.password,
+				telephone: data.telephone,
+				email: data.email,
 			},
 		};
-		console.log('objeto creado ', usuario);
-		agregarUsuario(usuario);
+		console.log('objeto creado ', cliente);
+		agregarCliente(cliente);
 		cerrarModal();
 	};
-
-	// useEffect(() => {
-	// 	axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
-	// 		console.log(res.data);
-	// 		setListRol(res.data.list);
-	// 	});
-	// }, []);
 
 	return (
 		<form className="w-full max-w-lg" onSubmit={handleSubmit(onSubmit)}>
@@ -78,27 +63,6 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						type="text"
 						placeholder="Jane"
 					/>
-					{/* <p className="text-red-500 text-xs italic">
-						Todos los datos debe de ser ingresados.
-					</p> */}
-				</div>
-				<div className="w-full  px-3  mb-2">
-					<label
-						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-						htmlFor="grid-last-name"
-					>
-						Usuario
-					</label>
-					<input
-						{...register('userName', {
-							required: true,
-							pattern: /[^0-9]/,
-						})}
-						className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-						id="grid-last-name"
-						type="text"
-						placeholder="Doe"
-					/>
 				</div>
 			</div>
 			<div className="flex flex-wrap -mx-3 mb-6">
@@ -123,27 +87,6 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						placeholder="08888880"
 					/>
 				</div>
-				<div className="w-1/2  px-3">
-					<label
-						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-						htmlFor="grid-last-name"
-					>
-						Rol
-					</label>
-					<select
-						{...register('rol')}
-						className="appearance-none block w-full mb-3 bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-					>
-						{listRol &&
-							listRol.map((item) => {
-								return (
-									<option key={item.rol_id} value={item.rol_id}>
-										{item.name}
-									</option>
-								);
-							})}
-					</select>
-				</div>
 				<div className="w-1/2 px-3">
 					<label
 						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -165,7 +108,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						placeholder="555-555-555"
 					/>
 				</div>
-				<div className="w-1/2 px-3">
+				<div className="w-full px-3">
 					<label
 						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 						htmlFor="grid-correo"
@@ -196,21 +139,6 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						id="grid-correo"
 						type="text"
 						placeholder="juan@gmail.com"
-					/>
-				</div>
-				<div className="w-full px-3">
-					<label
-						className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-						htmlFor="grid-password"
-					>
-						Password
-					</label>
-					<input
-						{...register('password')}
-						className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-						id="grid-password"
-						type="password"
-						placeholder="******************"
 					/>
 				</div>
 				<hr />

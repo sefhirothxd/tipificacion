@@ -3,6 +3,8 @@ import Modal from '../Modal';
 import axios from 'axios';
 import FormRegister from './FormUsuarioNuevo';
 import MaterialTable from 'material-table';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 //icon
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -61,6 +63,23 @@ const GestionUser = () => {
 			setUsuarios(res.data);
 			console.log(res.data);
 		});
+		Toastify({
+			text:
+				res.data.code === '200'
+					? 'Se agrego el Nuevo rol'
+					: 'Erro en el guardado',
+			duration: 5000,
+			destination: '',
+			newWindow: true,
+			close: true,
+			gravity: 'top', // `top` or `bottom`
+			position: 'right', // `left`, `center` or `right`
+			stopOnFocus: true, // Prevents dismissing of toast on hover
+			style: {
+				background: 'linear-gradient(to right, #00b09b, #96c93d)',
+			},
+			onClick: function () {}, // Callback after click
+		}).showToast();
 	};
 
 	const borrarUsuarios = (data) => {

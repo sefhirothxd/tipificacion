@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useEffect } from 'react';
 import Modal from '../Modal';
 import axios from 'axios';
-import FormClienteReg from './FormClienteNuevo';
+import FormRolNuevo from './FormRolNuevo';
 import MaterialTable from 'material-table';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
@@ -45,29 +45,24 @@ const tableIcons = {
 	ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
 	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
-const GestionUser = () => {
-	const [usuarios, setUsuarios] = useState([]);
+const GestionRol = () => {
 	const [editUser, setEditUser] = useState({});
 	const [listRol, setListRol] = useState();
 	const [activo, setactivo] = useState(false);
 	const [edit, setEdit] = useState(false);
 
-	const agregarCliente = async (data) => {
+	const agregarRol = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'http://typing-control.herokuapp.com/user/save-user',
+			'http://typing-control.herokuapp.com/rol/save-rol',
 			data
 		);
-		console.log(res);
-		axios.get('http://typing-control.herokuapp.com/user/list').then((res) => {
-			setUsuarios(res.data);
-			console.log(res.data);
+		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+			setListRol(res.data.list);
+			console.log(res.data.list);
 		});
 		Toastify({
-			text:
-				res.data.code === '200'
-					? 'Se agrego el Nuevo rol'
-					: 'Erro en el guardado',
+			text: res.data.code === '200' ? 'Usuario creado' : 'Erro en el guardado',
 			duration: 5000,
 			destination: '',
 			newWindow: true,
@@ -84,7 +79,7 @@ const GestionUser = () => {
 
 	const borrarUsuarios = (data) => {
 		console.log(data);
-		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
+		setListRol(listRol.filter((rol) => rol.name !== data));
 	};
 	const editarUsuario = (data) => {
 		setEditUser(data);
@@ -96,39 +91,37 @@ const GestionUser = () => {
 	};
 
 	useEffect(() => {
-		axios
-			.get('https://typing-control.herokuapp.com/customer/list')
-			.then((res) => {
-				console.log('clientes: ', res.data);
-				setUsuarios(res.data);
-			});
+		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+			console.log(res.data.list);
+			setListRol(res.data.list);
+		});
 	}, []);
 
 	return (
 		<div className="mx-2 md:mx-8 mt-4 ">
 			<div className="flex  justify-between items-center flex-wrap">
 				<h1 className="text-2xl md:text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
-					Gestion de Base
+					Gestion de Roles
 				</h1>
 				<button
 					onClick={() => setactivo(true)}
-					className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
+					className="bg-naranjaEntel py-2  px-4 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
 				>
-					Crear Clientes
+					Crear Rol
 				</button>
 			</div>
 			{activo ? (
 				<Modal cerrarModal={cerrarModal}>
 					{edit ? (
-						<FormClienteReg
+						<FormRolNuevo
 							cerrarModal={cerrarModal}
 							editarUsuario={editarUsuario}
 							editUser={editUser}
 						/>
 					) : (
-						<FormClienteReg
+						<FormRolNuevo
 							cerrarModal={cerrarModal}
-							agregarCliente={agregarCliente}
+							agregarRol={agregarRol}
 							listRol={listRol}
 						/>
 					)}
@@ -137,14 +130,11 @@ const GestionUser = () => {
 			<div>
 				<MaterialTable
 					title=""
-					data={usuarios}
+					data={listRol}
 					columns={[
-						{ title: 'Nombre', field: 'person.name' },
-						{ title: 'Apellido', field: 'person.lastName' },
-						{ title: 'DNI', field: 'person.numDoc' },
-						{ title: 'Direccion', field: 'person.direction' },
-						{ title: 'Telefono', field: 'person.telephone' },
-						{ title: 'Correo', field: 'person.email' },
+						{ title: 'Nombre', field: 'name' },
+						{ title: 'Descripcion', field: 'descripcion' },
+						{ title: 'Estado', field: 'state' },
 					]}
 					icons={tableIcons}
 					actions={[
@@ -157,7 +147,7 @@ const GestionUser = () => {
 						(rowData) => ({
 							icon: DeleteOutline,
 							tooltip: 'Dar de baja',
-							onClick: () => borrarUsuarios(rowData.userName),
+							onClick: () => borrarUsuarios(rowData.name),
 						}),
 					]}
 					options={{
@@ -169,4 +159,4 @@ const GestionUser = () => {
 	);
 };
 
-export default GestionUser;
+export default GestionRol;
