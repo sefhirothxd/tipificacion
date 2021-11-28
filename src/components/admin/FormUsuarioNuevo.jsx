@@ -76,7 +76,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-azulEntel focus:border-4 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
 						id="grid-first-name"
 						type="text"
-						placeholder="Jane"
+						placeholder="Rosales"
 					/>
 					{/* <p className="text-red-500 text-xs italic">
 						Todos los datos debe de ser ingresados.
@@ -195,7 +195,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 						className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 						id="grid-correo"
 						type="text"
-						placeholder="juan@gmail.com"
+						placeholder="av. pablo 351"
 					/>
 				</div>
 				<div className="w-full px-3">

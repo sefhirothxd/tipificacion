@@ -9,7 +9,7 @@ const Principal = () => {
 	const [num, setNum] = useState(0);
 	const [cliente, setCliente] = useState();
 	const [estado, setEstado] = useState(false);
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm();
 
 	const siguienteCliente = (e) => {
 		// e.preventDefault();
@@ -47,9 +47,24 @@ const Principal = () => {
 					console.log(response.data);
 				});
 			setNum(num + 1);
+			Toastify({
+				text: 'Se registro la informacion',
+				duration: 5000,
+				destination: '',
+				newWindow: true,
+				close: true,
+				gravity: 'top', // `top` or `bottom`
+				position: 'right', // `left`, `center` or `right`
+				stopOnFocus: true, // Prevents dismissing of toast on hover
+				style: {
+					background: 'green',
+				},
+				onClick: function () {}, // Callback after click
+			}).showToast();
 		}
 		console.log('acumulador: ', num + 1);
 		console.log('tamaño Array: ', cliente.length - 1);
+		reset();
 	};
 
 	useEffect(() => {
@@ -159,7 +174,7 @@ const Principal = () => {
 				) : (
 					<div className="flex justify-center items-center h-full relative">
 						<button
-							className="bg-naranjaEntel py-2 absolute top-500 px-4 text-center text-2xl font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
+							className="bg-naranjaEntel py-2 absolute top-80 px-4 text-center text-2xl font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
 							onClick={() => setEstado(true)}
 						>
 							Iniciar

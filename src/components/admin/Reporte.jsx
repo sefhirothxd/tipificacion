@@ -5,6 +5,7 @@ import FormClienteReg from './FormClienteNuevo';
 import MaterialTable from 'material-table';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import ExportExcel from 'react-export-excel';
 //icon
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -21,6 +22,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { assertAnyTypeAnnotation } from '@babel/types';
 
 const tableIcons = {
 	Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -47,18 +49,42 @@ const tableIcons = {
 };
 const Reporte = () => {
 	const [usuarios, setUsuarios] = useState([]);
-	const [activo, setactivo] = useState(false);
+	const [excel, setExcel] = useState();
+
+	const ExcelFile = ExportExcel.ExcelFile;
+	const ExcelSheet = ExportExcel.ExcelSheet;
+	const ExcelColumn = ExportExcel.ExcelColumn;
 
 	const borrarUsuarios = (data) => {
 		console.log(data);
 		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
 	};
-
-	useEffect(() => {
-		axios.get('https://typing-control.herokuapp.com/call/list').then((res) => {
-			console.log('clientes: ', res.data);
-			setUsuarios(res.data);
+	const exportExcel = () => {
+		let arrayCliente = [];
+		usuarios.map((item) => {
+			arrayCliente.push({
+				nombre: item.cliente_id.person.name,
+				apellido: item.cliente_id.person.lastName,
+				dni: item.cliente_id.person.numDoc,
+				direccion: item.cliente_id.person.direction,
+				telefono: item.cliente_id.person.telephone,
+				fecha: item.cliente_id.fecha_registro,
+				descripcion: item.description,
+				estado: item.typing_id.titulo,
+			});
 		});
+		console.log('export :', arrayCliente);
+		setExcel(arrayCliente);
+	};
+
+	useEffect(async () => {
+		await axios
+			.get('https://typing-control.herokuapp.com/call/list')
+			.then((res) => {
+				console.log('clientes: ', res.data);
+				setUsuarios(res.data);
+			});
+		exportExcel();
 	}, []);
 
 	return (
@@ -67,12 +93,6 @@ const Reporte = () => {
 				<h1 className="text-2xl md:text-4xl text-naranjaEntel font-barlow font-semibold mb-8">
 					Reporte
 				</h1>
-				<button
-					onClick={() => setactivo(true)}
-					className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none"
-				>
-					Crear Clientes
-				</button>
 			</div>
 			<div>
 				<MaterialTable
@@ -100,6 +120,18 @@ const Reporte = () => {
 						actionsColumnIndex: -1,
 					}}
 				/>
+				<ExcelFile
+					element={
+						<button className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none">
+							Exportar
+						</button>
+					}
+					filename="Reporte"
+				>
+					<ExcelSheet data={excel} name="Leaves">
+						<ExcelColumn label="Name" value="nombre" />
+					</ExcelSheet>
+				</ExcelFile>
 			</div>
 		</div>
 	);

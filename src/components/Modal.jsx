@@ -6,9 +6,7 @@ const Modal = ({ cerrarModal, children }) => {
 			<div className="bg-white rounded-lg w-80 ">
 				<div className="flex flex-col items-start p-4">
 					<div className="flex items-center w-full">
-						<h2 className="text-gray-900 font-medium text-lg">
-							Creacion de usuario
-						</h2>
+						{/* <h2 className="text-gray-900 font-medium text-lg"></h2> */}
 						<svg
 							onClick={cerrarModal}
 							className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer"
