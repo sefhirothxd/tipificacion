@@ -59,9 +59,9 @@ const Reporte = () => {
 		console.log(data);
 		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
 	};
-	const exportExcel = () => {
+	const exportExcel = (data) => {
 		let arrayCliente = [];
-		usuarios.map((item) => {
+		data.map((item) => {
 			arrayCliente.push({
 				nombre: item.cliente_id.person.name,
 				apellido: item.cliente_id.person.lastName,
@@ -77,14 +77,17 @@ const Reporte = () => {
 		setExcel(arrayCliente);
 	};
 
-	useEffect(async () => {
-		await axios
-			.get('https://typing-control.herokuapp.com/call/list')
-			.then((res) => {
-				console.log('clientes: ', res.data);
-				setUsuarios(res.data);
-			});
-		exportExcel();
+	useEffect(() => {
+		const probando = async () => {
+			await axios
+				.get('https://typing-control.herokuapp.com/call/list')
+				.then((res) => {
+					console.log('clientes: ', res.data);
+					setUsuarios(res.data);
+					exportExcel(res.data);
+				});
+		};
+		probando();
 	}, []);
 
 	return (
@@ -102,11 +105,11 @@ const Reporte = () => {
 						{ title: 'Nombre', field: 'cliente_id.person.name' },
 						{ title: 'Apellido', field: 'cliente_id.person.lastName' },
 						{ title: 'DNI', field: 'cliente_id.person.numDoc' },
-						{ title: 'Direccion', field: 'cliente_id.person.direction' },
 						{ title: 'Telefono', field: 'cliente_id.person.telephone' },
 						{ title: 'Correo', field: 'cliente_id.person.email' },
 						{ title: 'Fecha Registro', field: 'cliente_id.fecha_registro' },
 						{ title: 'Descripcion', field: 'description' },
+						{ title: 'Estado', field: 'typing_id.titulo' },
 					]}
 					icons={tableIcons}
 					actions={[
@@ -130,6 +133,13 @@ const Reporte = () => {
 				>
 					<ExcelSheet data={excel} name="Leaves">
 						<ExcelColumn label="Name" value="nombre" />
+						<ExcelColumn label="Name" value="apellido" />
+						<ExcelColumn label="Name" value="dni" />
+						<ExcelColumn label="Name" value="direccion" />
+						<ExcelColumn label="Name" value="telefono" />
+						<ExcelColumn label="Name" value="fecha" />
+						<ExcelColumn label="Name" value="descripcion" />
+						<ExcelColumn label="Name" value="estado" />
 					</ExcelSheet>
 				</ExcelFile>
 			</div>
