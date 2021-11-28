@@ -48,6 +48,7 @@ const tableIcons = {
 	ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 const Reporte = () => {
+	const [username, setUsername] = useState('Pedro Castillo');
 	const [usuarios, setUsuarios] = useState([]);
 	const [excel, setExcel] = useState();
 
@@ -71,6 +72,7 @@ const Reporte = () => {
 				fecha: item.cliente_id.fecha_registro,
 				descripcion: item.description,
 				estado: item.typing_id.titulo,
+				usuario: username,
 			});
 		});
 		console.log('export :', arrayCliente);
@@ -123,6 +125,16 @@ const Reporte = () => {
 						actionsColumnIndex: -1,
 						exportButton: true,
 					}}
+					localization={{
+						pagination: {
+							labelRowsSelect: 'Siguiente',
+							labelDisplayedRows: '{count} de {from}-{to}',
+							firstTooltip: 'Primera página',
+							previousTooltip: 'Página anterior',
+							nextTooltip: 'Próxima página',
+							lastTooltip: 'Última página',
+						},
+					}}
 				/>
 				<ExcelFile
 					element={
@@ -133,14 +145,15 @@ const Reporte = () => {
 					filename="Reporte"
 				>
 					<ExcelSheet data={excel} name="Leaves">
-						<ExcelColumn label="Name" value="nombre" />
-						<ExcelColumn label="Name" value="apellido" />
-						<ExcelColumn label="Name" value="dni" />
-						<ExcelColumn label="Name" value="direccion" />
-						<ExcelColumn label="Name" value="telefono" />
-						<ExcelColumn label="Name" value="fecha" />
-						<ExcelColumn label="Name" value="descripcion" />
-						<ExcelColumn label="Name" value="estado" />
+						<ExcelColumn label="nombre" value="nombre" />
+						<ExcelColumn label="apellido" value="apellido" />
+						<ExcelColumn label="dni" value="dni" />
+						<ExcelColumn label="direccion" value="direccion" />
+						<ExcelColumn label="telefono" value="telefono" />
+						<ExcelColumn label="fecha" value="fecha" />
+						<ExcelColumn label="descripcion" value="descripcion" />
+						<ExcelColumn label="estado" value="estado" />
+						<ExcelColumn label="usuario" value="usuario" />
 					</ExcelSheet>
 				</ExcelFile>
 			</div>
