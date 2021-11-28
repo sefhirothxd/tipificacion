@@ -7,7 +7,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarCliente, listRol }) => {
 	const onSubmit = (data) => {
 		console.log(data);
 		const cliente = {
-			fecha_registro: new Date(),
+			fecha_registro: '10-10-2021',
 			person: {
 				name: data.name,
 				lastName: data.lastName,

@@ -50,15 +50,21 @@ const tableIcons = {
 const Reporte = () => {
 	const [username, setUsername] = useState('Pedro Castillo');
 	const [usuarios, setUsuarios] = useState([]);
+	const [fecha1, setFecha1] = useState();
+	const [fecha2, setFecha2] = useState();
 	const [excel, setExcel] = useState();
 
 	const ExcelFile = ExportExcel.ExcelFile;
 	const ExcelSheet = ExportExcel.ExcelSheet;
 	const ExcelColumn = ExportExcel.ExcelColumn;
 
-	const borrarUsuarios = (data) => {
-		console.log(data);
-		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
+	const filtrarFecha = () => {
+		console.log(fecha1);
+		console.log(fecha2);
+		const fecha = usuarios.filter(
+			(item) => item.cliente_id.fecha_registro !== fecha1
+		);
+		console.log(fecha);
 	};
 	const exportExcel = (data) => {
 		let arrayCliente = [];
@@ -100,6 +106,14 @@ const Reporte = () => {
 				</h1>
 			</div>
 			<div>
+				<input
+					type="date"
+					onChange={(e) => setFecha1({ fecha: e.target.value })}
+				/>
+				<input
+					type="date"
+					onChange={(e) => setFecha2({ fecha: e.target.value })}
+				/>
 				<MaterialTable
 					title=""
 					data={usuarios}
@@ -118,7 +132,7 @@ const Reporte = () => {
 						(rowData) => ({
 							icon: DeleteOutline,
 							tooltip: 'Dar de baja',
-							onClick: () => borrarUsuarios(rowData.userName),
+							onClick: () => filtrarFecha(),
 						}),
 					]}
 					options={{
