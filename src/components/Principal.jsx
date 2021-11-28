@@ -139,9 +139,7 @@ const Principal = () => {
 											return (
 												item.nivel == 3 && (
 													<option
-														{...register('typing_id', {
-															required: true,
-														})}
+														{...register('typing_id', {})}
 														key={index}
 														value={item.nivel_id}
 													>

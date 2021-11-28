@@ -121,6 +121,7 @@ const Reporte = () => {
 					]}
 					options={{
 						actionsColumnIndex: -1,
+						exportButton: true,
 					}}
 				/>
 				<ExcelFile
