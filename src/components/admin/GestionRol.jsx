@@ -57,7 +57,7 @@ const GestionRol = () => {
 			'http://typing-control.herokuapp.com/rol/save-rol',
 			data
 		);
-		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
 			setListRol(res.data.list);
 			console.log(res.data.list);
 		});
@@ -91,7 +91,7 @@ const GestionRol = () => {
 	};
 
 	useEffect(() => {
-		axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
 			console.log(res.data.list);
 			setListRol(res.data.list);
 		});

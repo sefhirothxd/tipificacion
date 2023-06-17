@@ -42,7 +42,7 @@ const Principal = () => {
 			}).showToast();
 		} else {
 			axios
-				.post('https://typing-control.herokuapp.com/call/save', tipi)
+				.post('https://control-backend-production.up.railway.app/call/save', tipi)
 				.then((response) => {
 					console.log(response.data);
 				});
@@ -69,13 +69,13 @@ const Principal = () => {
 
 	useEffect(() => {
 		axios
-			.get('https://typing-control.herokuapp.com/customer/list')
+			.get('https://control-backend-production.up.railway.app/customer/list')
 			.then((response) => {
 				console.log(response.data);
 				setCliente(response.data);
 			});
 		axios
-			.get('https://typing-control.herokuapp.com/nivel/list')
+			.get('https://control-backend-production.up.railway.app/nivel/list')
 			.then((response) => {
 				console.log('combo: ', response.data.list);
 				setLista(response.data.list);

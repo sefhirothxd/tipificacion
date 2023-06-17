@@ -88,7 +88,7 @@ const Reporte = () => {
 	useEffect(() => {
 		const probando = async () => {
 			await axios
-				.get('https://typing-control.herokuapp.com/call/list')
+				.get('https://control-backend-production.up.railway.app/call/list')
 				.then((res) => {
 					console.log('clientes: ', res.data);
 					setUsuarios(res.data);

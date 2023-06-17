@@ -31,7 +31,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarUsuario, listRol }) => {
 	};
 
 	// useEffect(() => {
-	// 	axios.get('https://typing-control.herokuapp.com/rol/list').then((res) => {
+	// 	axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
 	// 		console.log(res.data);
 	// 		setListRol(res.data.list);
 	// 	});
