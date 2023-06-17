@@ -70,14 +70,14 @@ const Reporte = () => {
 		let arrayCliente = [];
 		data.map((item) => {
 			arrayCliente.push({
-				nombre: item.cliente_id.person.name,
-				apellido: item.cliente_id.person.lastName,
-				dni: item.cliente_id.person.numDoc,
-				direccion: item.cliente_id.person.direction,
-				telefono: item.cliente_id.person.telephone,
-				fecha: item.cliente_id.fecha_registro,
+				nombre: item.cliente.person.name,
+				apellido: item.cliente.person.lastName,
+				dni: item.cliente.person.numDoc,
+				direccion: item.cliente.person.direction,
+				telefono: item.cliente.person.telephone,
+				fecha: item.cliente.fecha_registro,
 				descripcion: item.description,
-				estado: item.typing_id.titulo,
+				// estado: item.typing_id.titulo,
 				usuario: username,
 			});
 		});
@@ -118,14 +118,14 @@ const Reporte = () => {
 					title=""
 					data={usuarios}
 					columns={[
-						{ title: 'Nombre', field: 'cliente_id.person.name' },
-						{ title: 'Apellido', field: 'cliente_id.person.lastName' },
-						{ title: 'DNI', field: 'cliente_id.person.numDoc' },
-						{ title: 'Telefono', field: 'cliente_id.person.telephone' },
-						{ title: 'Correo', field: 'cliente_id.person.email' },
-						{ title: 'Fecha Registro', field: 'cliente_id.fecha_registro' },
+						{ title: 'Nombre', field: 'cliente.person.name' },
+						{ title: 'Apellido', field: 'cliente.person.lastName' },
+						{ title: 'DNI', field: 'cliente.person.numDoc' },
+						{ title: 'Telefono', field: 'cliente.person.telephone' },
+						{ title: 'Correo', field: 'cliente.person.email' },
+						{ title: 'Fecha Registro', field: 'cliente.fecha_registro' },
 						{ title: 'Descripcion', field: 'description' },
-						{ title: 'Estado', field: 'typing_id.titulo' },
+						// { title: 'Estado', field: 'typing_id.titulo' },
 					]}
 					icons={tableIcons}
 					actions={[

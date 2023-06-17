@@ -55,11 +55,11 @@ const GestionUser = () => {
 	const agregarUsuario = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'http://typing-control.herokuapp.com/user/save-user',
+			'https://control-backend-production.up.railway.app/user/save-user',
 			data
 		);
 		console.log(res);
-		axios.get('http://typing-control.herokuapp.com/user/list').then((res) => {
+		axios.get('https://control-backend-production.up.railway.app/customer/list').then((res) => {
 			setUsuarios(res.data);
 			console.log(res.data);
 		});
@@ -96,7 +96,7 @@ const GestionUser = () => {
 	};
 
 	useEffect(() => {
-		axios.get('https://control-backend-production.up.railway.app/user/list').then((res) => {
+		axios.get('https://control-backend-production.up.railway.app/customer/list').then((res) => {
 			console.log('usuarios: ', res.data);
 			setUsuarios(res.data);
 		});

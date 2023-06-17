@@ -25,7 +25,7 @@ const Principal = () => {
 			description: e.descripcion,
 		};
 		console.log('tipificacion', tipi);
-		if (cliente.length - 1 == num) {
+		if (cliente.length - 1 === num) {
 			Toastify({
 				text: num === cliente.length - 1 && 'No hay mas Clientes',
 				duration: 5000,
@@ -107,7 +107,7 @@ const Principal = () => {
 									{lista ? (
 										lista.map((item, index) => {
 											return (
-												item.nivel == 1 && (
+												item.nivel === 1 && (
 													<option key={index} value={item.titulo}>
 														{item.titulo}
 													</option>
@@ -122,7 +122,7 @@ const Principal = () => {
 									{lista ? (
 										lista.map((item, index) => {
 											return (
-												item.nivel == 2 && (
+												item.nivel === 2 && (
 													<option key={index} value={item.titulo}>
 														{item.titulo}
 													</option>
@@ -137,7 +137,7 @@ const Principal = () => {
 									{lista ? (
 										lista.map((item, index) => {
 											return (
-												item.nivel == 3 && (
+												item.nivel === 3 && (
 													<option
 														{...register('typing_id', {})}
 														key={index}

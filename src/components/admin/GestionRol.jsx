@@ -54,7 +54,7 @@ const GestionRol = () => {
 	const agregarRol = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'http://typing-control.herokuapp.com/rol/save-rol',
+			'https://control-backend-production.up.railway.app/rol/save-rol',
 			data
 		);
 		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
@@ -134,7 +134,7 @@ const GestionRol = () => {
 					columns={[
 						{ title: 'Nombre', field: 'name' },
 						{ title: 'Descripcion', field: 'descripcion' },
-						{ title: 'Estado', field: 'state' },
+						// { title: 'Estado', field: 'state' },
 					]}
 					icons={tableIcons}
 					actions={[
