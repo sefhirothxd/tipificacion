@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				azulEntel: '#0154A0',
+				azulEntel: '#0436a1',
 				naranjaEntel: '#ff560a',
 			},
 			fontFamily: {

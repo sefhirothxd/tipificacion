@@ -22,7 +22,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { assertAnyTypeAnnotation } from '@babel/types';
+
 
 const tableIcons = {
 	Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -69,6 +69,7 @@ const Reporte = () => {
 	const exportExcel = (data) => {
 		let arrayCliente = [];
 		data.map((item) => {
+			console.log(item.cliente.person,"aqui toy");
 			arrayCliente.push({
 				nombre: item.cliente.person.name,
 				apellido: item.cliente.person.lastName,
@@ -92,7 +93,7 @@ const Reporte = () => {
 				.then((res) => {
 					console.log('clientes: ', res.data);
 					setUsuarios(res.data);
-					exportExcel(res.data);
+					// exportExcel(res.data);
 				});
 		};
 		probando();

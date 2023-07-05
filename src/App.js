@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Login from './components/Login';
+import Inicio from './components/Inicio';
 import Principal from './components/Principal';
 import Error from './components/Error404';
 import Dashboard from './components/admin/Dashboard';
@@ -19,6 +20,9 @@ const App = () => {
 				</Route>
 				<Layout>
 					<Route path="/tipificar" exact>
+						<Inicio />
+					</Route>
+					<Route path="/tipificar/llamada" exact>
 						<Principal />
 					</Route>
 					<Route path="/dashboard" exact>
