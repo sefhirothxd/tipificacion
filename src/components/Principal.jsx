@@ -10,6 +10,7 @@ import callPlus from '../asset/icon/callPlus.svg';
 import mute from '../asset/icon/mute.svg';
 import dial from '../asset/icon/dial.svg';
 import pause from '../asset/icon/pause.svg';
+import sonido from '../asset/mp3/telefono.mp3';
 
 const Principal = () => {
 	const [lista, setLista] = useState();
@@ -32,6 +33,7 @@ const Principal = () => {
 			},
 			description: e.descripcion,
 		};
+
 		console.log('tipificacion', tipi);
 		if (cliente.length - 1 === num) {
 			Toastify({
@@ -76,7 +78,17 @@ const Principal = () => {
 		console.log('acumulador: ', num + 1);
 		console.log('tamaño Array: ', cliente.length - 1);
 		reset();
+		playSound();
+		setSeconds(0);
 	};
+	const playSound = () => {
+		const audio = new Audio(sonido);
+		audio.play();
+	  };
+
+	useEffect(() => {
+		playSound();
+	  }, []);
 
 	useEffect(() => {
 		const timerID = setInterval(() => {
@@ -114,13 +126,10 @@ const Principal = () => {
 	}, []);
 
 	return (
-		<div className="bg-gray-100 w-full content-container flex justify-center items-start">
-			<div className="flex justify-center items-center   w-full">
-				<form
-					className=" sm:px-9 py-9 px-3 rounded-lg shadow-lg font-barlow flex flex-col justify-between flex-wrap  w-1200 mt-8 bg-white"
-					onSubmit={handleSubmit(siguienteCliente)}
-				>
-					<h1 className="text-2xl md:text-4xl text-naranjaEntel text-center font-barlow font-semibold mb-8">
+		<div className="bg-gray-100 p-2 w-full content-container flex justify-center items-start">
+			<div className="flex justify-between items-center w-full flex-wrap lg:flex-nowrap">
+				<div className='mr-0 md:mr-5 px-3 py-5 bg-white rounded-lg shadow-lg mt-8 w-full lg:w-1/2'>
+				<h1 className="text-2xl md:text-4xl text-naranjaEntel text-center font-barlow font-semibold mb-8">
 						Tipificacion de llamadas
 					</h1>
 					<div>
@@ -167,6 +176,12 @@ const Principal = () => {
 							</div>
 						</div>
 					</div>
+				</div>
+				<form
+					className=" sm:px-9 py-3 px-3 rounded-lg shadow-lg font-barlow flex flex-col justify-between flex-wrap  w-1200 mt-8 bg-white"
+					onSubmit={handleSubmit(siguienteCliente)}
+				>
+				
 					<div className="flex justify-between w-full mb-5 items-center">
 						<div className="">
 							<h1>Informacion del cliente</h1>

@@ -34,7 +34,7 @@ const Login = () => {
 		>
 			<div className="mb-8 flex justify-center items-center mr-8">
 				<img
-					src="https://www.entel.pe/wp-content/themes/entelperu/css/images/logo-entel.svg"
+					src="https://www.entel.cl/public/footer/doble/public/img/webp/logo.webp?v=10.10"
 					alt="Logo Entel"
 					className="mr-2"
 				/>

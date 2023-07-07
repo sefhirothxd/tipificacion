@@ -4,6 +4,7 @@ import { ReactComponent as HamburgerX } from '../asset/icon/close.svg';
 import { ReactComponent as CerrarSesion } from '../asset/icon/cerrarSesion.svg';
 import foto from '../asset/img/foto-perfil.jpg';
 import { Link } from 'react-router-dom';
+import entel from '../asset/img/entelRm.png';
 
 const Header = () => {
 	const [menu, setMenu] = useState(false);
@@ -166,9 +167,9 @@ const Header = () => {
 				/>
 			</div>
 			<img
-				src="https://www.entel.pe/wp-content/themes/entelperu/css/images/logo-entel.svg"
+				src='https://www.entel.cl/public/footer/doble/public/img/webp/logo.webp?v=10.10'
 				alt="Logo Entel"
-				className=" ml-4"
+				className=" ml-4 w-8"
 			/>
 		</div>
 	);
