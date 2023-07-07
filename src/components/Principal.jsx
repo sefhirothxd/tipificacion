@@ -10,7 +10,7 @@ import callPlus from '../asset/icon/callPlus.svg';
 import mute from '../asset/icon/mute.svg';
 import dial from '../asset/icon/dial.svg';
 import pause from '../asset/icon/pause.svg';
-import sonido from '../asset/mp3/telefono.mp3';
+import sonido from '../asset/mp3/audioChile.mp3';
 
 const Principal = () => {
 	const [lista, setLista] = useState();
