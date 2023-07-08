@@ -58,13 +58,15 @@ const Reporte = () => {
 	const ExcelSheet = ExportExcel.ExcelSheet;
 	const ExcelColumn = ExportExcel.ExcelColumn;
 
-	const filtrarFecha = () => {
-		console.log(fecha1);
-		console.log(fecha2);
-		const fecha = usuarios.filter(
-			(item) => item.cliente_id.fecha_registro !== fecha1
-		);
-		console.log(fecha);
+	const borrarRegistro = async(id) => {
+		await axios
+				.delete(`https://back-tipificacion-production.up.railway.app/call/delete/${id}`)
+				.then((res) => {
+					console.log('clientes: ', res.data);
+					// exportExcel(res.data);
+				});
+		const newList = usuarios.filter((item) => item.call_id !== id);
+		setUsuarios(newList);
 	};
 	const exportExcel = (data) => {
 		let arrayCliente = [];
@@ -89,7 +91,7 @@ const Reporte = () => {
 	useEffect(() => {
 		const probando = async () => {
 			await axios
-				.get('https://control-backend-production.up.railway.app/call/list')
+				.get('https://back-tipificacion-production.up.railway.app/call/list')
 				.then((res) => {
 					console.log('clientes: ', res.data);
 					setUsuarios(res.data);
@@ -125,6 +127,7 @@ const Reporte = () => {
 						{ title: 'Telefono', field: 'cliente.person.telephone' },
 						{ title: 'Correo', field: 'cliente.person.email' },
 						{ title: 'Fecha Registro', field: 'cliente.fecha_registro' },
+						{ title: 'Tipificacion', field: 'nivel.titulo'},
 						{ title: 'Descripcion', field: 'description' },
 						// { title: 'Estado', field: 'typing_id.titulo' },
 					]}
@@ -132,8 +135,8 @@ const Reporte = () => {
 					actions={[
 						(rowData) => ({
 							icon: DeleteOutline,
-							tooltip: 'Dar de baja',
-							onClick: () => filtrarFecha(),
+							tooltip: 'eliminar registro',
+							onClick: () => borrarRegistro(rowData.call_id),
 						}),
 					]}
 					options={{
@@ -151,7 +154,7 @@ const Reporte = () => {
 						},
 					}}
 				/>
-				<ExcelFile
+				{/* <ExcelFile
 					element={
 						<button className="bg-naranjaEntel py-1  px-2 text-center text-base font-bold rounded  text-white mb-4 md:my-8 font-barlow outline-none focus:outline-none">
 							Exportar
@@ -170,7 +173,7 @@ const Reporte = () => {
 						<ExcelColumn label="estado" value="estado" />
 						<ExcelColumn label="usuario" value="usuario" />
 					</ExcelSheet>
-				</ExcelFile>
+				</ExcelFile> */}
 			</div>
 		</div>
 	);

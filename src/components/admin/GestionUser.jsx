@@ -55,11 +55,11 @@ const GestionUser = () => {
 	const agregarUsuario = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'https://control-backend-production.up.railway.app/user/save-user',
+			'https://back-tipificacion-production.up.railway.app/user/save-user',
 			data
 		);
 		console.log(res);
-		axios.get('https://control-backend-production.up.railway.app/customer/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/user/list').then((res) => {
 			setUsuarios(res.data);
 			console.log(res.data);
 		});
@@ -85,6 +85,7 @@ const GestionUser = () => {
 	const borrarUsuarios = (data) => {
 		console.log(data);
 		setUsuarios(usuarios.filter((usuario) => usuario.userName !== data));
+		axios.post('https://back-tipificacion-production.up.railway.app/user/delete', data);
 	};
 	const editarUsuario = (data) => {
 		setEditUser(data);
@@ -96,11 +97,11 @@ const GestionUser = () => {
 	};
 
 	useEffect(() => {
-		axios.get('https://control-backend-production.up.railway.app/customer/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/user/list').then((res) => {
 			console.log('usuarios: ', res.data);
 			setUsuarios(res.data);
 		});
-		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/rol/list').then((res) => {
 			console.log(res.data);
 			setListRol(res.data.list);
 		});

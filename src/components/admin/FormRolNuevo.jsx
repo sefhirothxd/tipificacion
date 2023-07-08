@@ -19,7 +19,7 @@ const FormUsuarioNuevo = ({ cerrarModal, agregarRol, listRol }) => {
 	};
 
 	// useEffect(() => {
-	// 	axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
+	// 	axios.get('https://back-tipificacion-production.up.railway.app/rol/list').then((res) => {
 	// 		console.log(res.data);
 	// 		setListRol(res.data.list);
 	// 	});

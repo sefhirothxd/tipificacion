@@ -42,12 +42,12 @@ const Header = () => {
 					/>
 					<div className="py-4 px-4 flex w-full flex-col justify-center font-barlow item-center bg-naranjaEntel border-b-4 border-white mb-8 ">
 						<img
-							src={foto}
+							src={'https://media.licdn.com/dms/image/C4E03AQGHayn7RhU5Dw/profile-displayphoto-shrink_800_800/0/1578872275928?e=1694044800&v=beta&t=-YI134Lg3FJS9HabFAJppJiLcbhsSX7qU9orBZKiZV4'}
 							alt="foto de perfil"
 							className="rounded-full w-32 mx-auto"
 						/>
 						<p className="text-center text-white mt-4 text-2xl font-barlow font-bold">
-							Pedro castillo
+							Julito Vega
 						</p>
 						<span className="text-center mb-4">Administrador</span>
 					</div>

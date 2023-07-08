@@ -23,17 +23,16 @@ const Principal = () => {
 	const siguienteCliente = (e) => {
 		// e.preventDefault();
 		console.log(e);
-		// console.table(cliente);
+		console.log(cliente[0], 'usuario actual');
 		let tipi = {
-			typing_id: {
-				nivel_id: parseInt(e.typing_id),
+			nivel: {
+				nivel_id: parseInt(e.nivel == 0 ? 7 : e.nivel),
 			},
-			cliente_id: {
+			cliente: {
 				id_cliente: parseInt(cliente[num].id_cliente),
 			},
 			description: e.descripcion,
 		};
-
 		console.log('tipificacion', tipi);
 		if (cliente.length - 1 === num) {
 			Toastify({
@@ -53,7 +52,7 @@ const Principal = () => {
 		} else {
 			axios
 				.post(
-					'https://control-backend-production.up.railway.app/call/save',
+					'https://back-tipificacion-production.up.railway.app/call/save',
 					tipi
 				)
 				.then((response) => {
@@ -78,17 +77,17 @@ const Principal = () => {
 		console.log('acumulador: ', num + 1);
 		console.log('tamaño Array: ', cliente.length - 1);
 		reset();
-		playSound();
+		// playSound();
 		setSeconds(0);
 	};
 	const playSound = () => {
-		const audio = new Audio(sonido);
+		let audio = new Audio(sonido);
 		audio.play();
-	  };
+	};
 
 	useEffect(() => {
 		playSound();
-	  }, []);
+	}, []);
 
 	useEffect(() => {
 		const timerID = setInterval(() => {
@@ -112,13 +111,13 @@ const Principal = () => {
 	};
 	useEffect(() => {
 		axios
-			.get('https://control-backend-production.up.railway.app/customer/list')
+			.get('https://back-tipificacion-production.up.railway.app/customer/list')
 			.then((response) => {
 				console.log(response.data);
 				setCliente(response.data);
 			});
 		axios
-			.get('https://control-backend-production.up.railway.app/nivel/list')
+			.get('https://back-tipificacion-production.up.railway.app/nivel/list')
 			.then((response) => {
 				console.log('combo: ', response.data.list);
 				setLista(response.data.list);
@@ -128,8 +127,8 @@ const Principal = () => {
 	return (
 		<div className="bg-gray-100 p-2 w-full content-container flex justify-center items-start">
 			<div className="flex justify-between items-center w-full flex-wrap lg:flex-nowrap">
-				<div className='mr-0 md:mr-5 px-3 py-5 bg-white rounded-lg shadow-lg mt-8 w-full lg:w-1/2'>
-				<h1 className="text-2xl md:text-4xl text-naranjaEntel text-center font-barlow font-semibold mb-8">
+				<div className="mr-0 md:mr-5 px-3 py-5 bg-white rounded-lg shadow-lg mt-8 w-full lg:w-1/2">
+					<h1 className="text-2xl md:text-4xl text-naranjaEntel text-center font-barlow font-semibold mb-8">
 						Tipificacion de llamadas
 					</h1>
 					<div>
@@ -181,7 +180,6 @@ const Principal = () => {
 					className=" sm:px-9 py-3 px-3 rounded-lg shadow-lg font-barlow flex flex-col justify-between flex-wrap  w-1200 mt-8 bg-white"
 					onSubmit={handleSubmit(siguienteCliente)}
 				>
-				
 					<div className="flex justify-between w-full mb-5 items-center">
 						<div className="">
 							<h1>Informacion del cliente</h1>
@@ -222,16 +220,17 @@ const Principal = () => {
 									<option value="0">No hay data</option>
 								)}
 							</select>
-							<select name="select" className="w-30 mt-3" id="">
+							<select
+								name="select"
+								{...register('nivel', {})}
+								className="w-30 mt-3"
+								id=""
+							>
 								{lista ? (
 									lista.map((item, index) => {
 										return (
 											item.nivel === 3 && (
-												<option
-													{...register('typing_id', {})}
-													key={index}
-													value={item.nivel_id}
-												>
+												<option key={index} value={item.nivel_id}>
 													{item.titulo}
 												</option>
 											)
@@ -243,9 +242,11 @@ const Principal = () => {
 							</select>
 						</div>
 					</div>
+				
 					<textarea
 						{...register('descripcion', {})}
 						className="border-black border-2 w-full h-40 p-2"
+						placeholder="Descripcion"
 					/>
 					<div className="w-full flex justify-end">
 						<button

@@ -54,10 +54,10 @@ const GestionRol = () => {
 	const agregarRol = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'https://control-backend-production.up.railway.app/rol/save-rol',
+			'https://back-tipificacion-production.up.railway.app/rol/save-rol',
 			data
 		);
-		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/rol/list').then((res) => {
 			setListRol(res.data.list);
 			console.log(res.data.list);
 		});
@@ -77,8 +77,9 @@ const GestionRol = () => {
 		}).showToast();
 	};
 
-	const borrarUsuarios = (data) => {
+	const borrarUsuarios = async (data) => {
 		console.log(data);
+		
 		setListRol(listRol.filter((rol) => rol.name !== data));
 	};
 	const editarUsuario = (data) => {
@@ -91,7 +92,7 @@ const GestionRol = () => {
 	};
 
 	useEffect(() => {
-		axios.get('https://control-backend-production.up.railway.app/rol/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/rol/list').then((res) => {
 			console.log(res.data.list);
 			setListRol(res.data.list);
 		});
@@ -147,7 +148,7 @@ const GestionRol = () => {
 						(rowData) => ({
 							icon: DeleteOutline,
 							tooltip: 'Dar de baja',
-							onClick: () => borrarUsuarios(rowData.name),
+							onClick: () => borrarUsuarios(rowData.rol_id),
 						}),
 					]}
 					options={{

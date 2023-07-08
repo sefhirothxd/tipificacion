@@ -55,11 +55,11 @@ const GestionUser = () => {
 	const agregarCliente = async (data) => {
 		console.log(data);
 		const res = await axios.post(
-			'https://control-backend-production.up.railway.app/user/save-user',
+			'https://back-tipificacion-production.up.railway.app/user/save-user',
 			data
 		);
 		console.log(res);
-		axios.get('https://control-backend-production.up.railway.app/user/list').then((res) => {
+		axios.get('https://back-tipificacion-production.up.railway.app/user/list').then((res) => {
 			setUsuarios(res.data);
 			console.log(res.data);
 		});
@@ -97,7 +97,7 @@ const GestionUser = () => {
 
 	useEffect(() => {
 		axios
-			.get('https://control-backend-production.up.railway.app/customer/list')
+			.get('https://back-tipificacion-production.up.railway.app/customer/list')
 			.then((res) => {
 				console.log('clientes: ', res.data);
 				setUsuarios(res.data);
